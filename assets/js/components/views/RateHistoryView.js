@@ -14,9 +14,16 @@ const RateHistoryView = ({
 }) => {
   const columns = ['Data', 'Średni', 'Kupno', 'Sprzedaż'];
 
+  const formatDateWithDay = (dateString) => {
+    const date = new Date(dateString);
+    const dayNames = ['ND', 'PON', 'WT', 'ŚR', 'CZW', 'PT', 'SOB'];
+    const dayName = dayNames[date.getDay()];
+    return `${dateString} (${dayName})`;
+  };
+
   const renderRow = (item, idx) => (
     <tr key={idx}>
-      <td>{item.date}</td>
+      <td>{formatDateWithDay(item.date)}</td>
       <td>{item.mid.toFixed(4)}</td>
       <td>{item.buy !== null ? item.buy.toFixed(4) : '-'}</td>
       <td>{item.sell.toFixed(4)}</td>
